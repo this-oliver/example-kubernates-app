@@ -16,9 +16,9 @@ This example is performed locally using **Minikube**, a tool that sets up a sing
 
 Install the following tools:
 
-- [Docker](https://docs.docker.com/get-docker/) on your local machine to build images.
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) on your local machine to interact with a Kubernates cluster.
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/) on your local machine to run a local Kubernates cluster.
+- [**Docker**](https://docs.docker.com/get-docker/) to build images.
+- [**Minikube**](https://minikube.sigs.k8s.io/docs/start/) to run a local Kubernates cluster.
+- [**kubectl**](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with a Kubernates cluster.
 
 ### Build the Docker Images
 
