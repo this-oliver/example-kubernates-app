@@ -3,7 +3,7 @@ import Express from "express";
 import Cors from "cors";
 import { createToken, verifyToken } from "./token.js";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 if (!JWT_SECRET) {
@@ -35,8 +35,12 @@ app.post("/tokens/:sample", (req, res) => {
 		return;
 	}
 
-	const token = createToken({ sample }, JWT_SECRET);
-	res.status(200).send({ token });
+	try {
+		const token = createToken({ sample }, JWT_SECRET);
+		res.status(200).send({ token });
+	} catch (error) {
+		res.status(400).send({ message: error.message });
+	}
 });
 
 app.get("/tokens/:token/verify", (req, res) => {
@@ -51,7 +55,7 @@ app.get("/tokens/:token/verify", (req, res) => {
 		const verified = verifyToken(token, JWT_SECRET);
 		res.status(200).send({ verified });
 	} catch (error) {
-		res.status(400).send({ error: error.message });
+		res.status(400).send({ message: error.message });
 	}
 });
 

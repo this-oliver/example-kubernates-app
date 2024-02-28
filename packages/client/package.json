@@ -1,0 +1,26 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "docker:build": "docker build -t example-kubernates-app:client .",
+    "docker:run": "docker run -p 8000:3000 --env-file .env example-kubernates-app:client",
+    "docker:tag": "docker tag example-kubernates-app:client thisoliver/example-kubernates-app:client",
+    "docker:push": "pnpm docker:build && pnpm docker:tag && docker push thisoliver/example-kubernates-app:client"
+  },
+  "dependencies": {
+    "nuxt": "^3.10.3",
+    "vue": "^3.4.19",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}

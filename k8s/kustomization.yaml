@@ -5,6 +5,8 @@ metadata:
 
 resources:
   - namespace.yaml
-  - deployment-server.yaml
-  - services.yaml
   - secrets.yaml
+  - deployment-server.yaml
+  - deployment-client.yaml
+  - service-server.yaml
+  - service-client.yaml

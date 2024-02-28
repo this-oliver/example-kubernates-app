@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "docker:build": "docker build -t example-kubernates-app:server .",
-    "docker:run": "docker run -p 3000:3000 example-kubernates-app:server",
+    "docker:run": "docker run -p 3000:3000 --env-file .env example-kubernates-app:server",
     "docker:tag": "docker tag example-kubernates-app:server thisoliver/example-kubernates-app:server",
     "docker:push": "pnpm docker:build && pnpm docker:tag && docker push thisoliver/example-kubernates-app:server"
   },
