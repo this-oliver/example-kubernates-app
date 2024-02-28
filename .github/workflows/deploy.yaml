@@ -10,7 +10,7 @@ env:
 
 jobs:
   deploy:
-    runs-on: linux
+    runs-on: ubuntu-latest
     
     steps:
       # get code
