@@ -1,5 +1,5 @@
 ARG NODE_VERSION=18.19.0
-FROM node:${NODE_VERSION}
+FROM node:${NODE_VERSION}-alpine
 
 # create the server directory
 WORKDIR /server
