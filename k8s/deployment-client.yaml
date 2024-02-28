@@ -16,8 +16,8 @@ spec:
       labels:
         app: client
     spec:
-      imagePullSecrets:
-        - name: example-app-docker-credentials # <- required to pull images in private registry/repository (value from name in secret.yaml)
+      #imagePullSecrets:
+      #  - name: example-app-docker-credentials # <- required to pull images in private registry/repository (value from name in secret.yaml)
       containers:
         - name: client
           image: thisoliver/example-kubernates-app:client # <- tag is important
