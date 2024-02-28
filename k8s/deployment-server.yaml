@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: example-app-space # <- name of the namespace
+  name: example-app-server
+  labels:
+    app: server
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      imagePullSecrets:
+        - name: example-app-docker-credentials # <- required to pull images in private registry/repository (value from name in secret.yaml)
+      containers:
+        - name: server
+          image: thisoliver/example-kubernates-app:server # <- tag is important
+          #image: example-kubernates-app:server # <- local image
+          #imagePullPolicy: Never # <- forces k8 controller to use local image
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: example-app-secrets # <- value from metadata.name in secrets.yaml
+                  key: jwt-secret
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
