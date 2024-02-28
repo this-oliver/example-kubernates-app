@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: example-app-space # <- name of the namespace
   name: example-app-server
   labels:
     app: server

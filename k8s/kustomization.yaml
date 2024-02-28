@@ -4,7 +4,6 @@ metadata:
   name: example-app
 
 resources:
-  - namespace.yaml
   - secrets.yaml
   - deployment-server.yaml
   - deployment-client.yaml
