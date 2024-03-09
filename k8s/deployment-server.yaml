@@ -6,7 +6,7 @@ metadata:
     app: server
 
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: server
@@ -15,8 +15,6 @@ spec:
       labels:
         app: server
     spec:
-      #imagePullSecrets:
-      #  - name: example-app-docker-credentials # <- required to pull images in private registry/repository (value from name in secret.yaml)
       containers:
         - name: server
           image: thisoliver/example-kubernates-app:server # <- tag is important
