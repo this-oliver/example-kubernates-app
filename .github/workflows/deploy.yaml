@@ -29,9 +29,11 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      # idk
+      # builds for multiple architectures and packages them into a single image
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          platforms: ${{ matrix.platform }}
 
       # login to docker hub (use token instead of password)
       - name: Login to Docker Hub
