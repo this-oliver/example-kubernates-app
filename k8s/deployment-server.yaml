@@ -1,0 +1,39 @@
+# See deployment-client.yaml for a brief explanation of the deployment config.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app-server # <- name of the deployment (must be unique in the namespace)
+  labels:
+    app: example-app
+    component: server
+
+spec:
+  replicas: 1 # how many pods need to be running at all times
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: thisoliver/example-kubernates-app:server # <- tag is important
+          imagePullPolicy: Always
+          #image: example-kubernates-app:server # <- local image
+          #imagePullPolicy: Never # <- forces k8 controller to use local image
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: example-app-secrets # <- value from metadata.name in secrets.yaml
+                  key: jwt-secret
+          ports:
+            - containerPort: 4000
+              name: server-port
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

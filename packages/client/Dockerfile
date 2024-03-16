@@ -1,6 +1,5 @@
 ARG NODE_VERSION=18.19.0
 FROM node:${NODE_VERSION}-bookworm-slim
-#FROM --platform=linux/amd64 node:${NODE_VERSION}-bookworm-slim
 
 # create the server directory
 WORKDIR /client

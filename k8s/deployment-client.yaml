@@ -8,47 +8,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-app-deployment
+  name: example-app-client # <- name of the deployment (must be unique in the namespace)
   labels:
     app: example-app
+    component: client
 
 spec:
   replicas: 1 # how many pods need to be running at all times
   selector:
     matchLabels:
-      app: example-app
+      component: client
   template:
     metadata:
       labels:
-        app: example-app
+        component: client
     spec:
       containers:
-        - name: server
-          image: thisoliver/example-kubernates-app:server # <- tag is important
-          #image: example-kubernates-app:server # <- local image
-          #imagePullPolicy: Never # <- forces k8 controller to use local image
-          env:
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: example-app-secrets # <- value from metadata.name in secrets.yaml
-                  key: jwt-secret
-          ports:
-            - containerPort: 4000
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-
         - name: client
           image: thisoliver/example-kubernates-app:client # <- tag is important
+          imagePullPolicy: Always
           #image: example-kubernates-app:client # <- local image
           #imagePullPolicy: Never # <- forces k8 controller to use local image
           env:
             - name: NUXT_PUBLIC_API_BASE
-              value: http://localhost:4000 # <- uses localhost for server container because they are in the same pod (deployment)
+              value: "http://example-app-server:4000" # <- service name for server deployment (see service-server.yaml)
           ports:
             - containerPort: 3000
+              name: client-port
           resources:
             limits:
               memory: "512Mi"

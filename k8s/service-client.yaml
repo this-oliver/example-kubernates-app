@@ -1,0 +1,43 @@
+# This is a Service config and it is used to define the communication
+# interface for deployments in a cluster towards other deployments in
+# the same cluster or towards the outside world. In this case, the service
+# defines the ports on the pods that will be exposed inside the cluster
+# (ClusterIP) and outside the cluster (NodePort). The service also selects
+# the deployment that it will be exposing the ports for using the selector
+# field. The `targetPort` field is used to specify the port that the service
+# will be exposing from the pod. The `port` field is used to specify the port
+# that the service will be exposing to the outside world.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-app-client
+  labels:
+    app: example-app
+    component: client
+
+spec:
+  type: ClusterIP
+  selector:
+    component: client # <- selects the deployment with the label component: client
+  ports:
+    - protocol: TCP
+      targetPort: client-port # <- client container in deployment.yaml
+      port: 3000 # <- port for external access
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-app-client-external
+  labels:
+    component: client
+
+spec:
+  type: NodePort
+  selector:
+    component: client # <- selects the deployment with the label component: client
+  ports:
+    - protocol: TCP
+      targetPort: client-port # <- client container in deployment.yaml
+      port: 3000 # <- port for external access
