@@ -1,6 +1,7 @@
 import "dotenv/config"; // <- imports environment variables
 import Express from "express";
 import Cors from "cors";
+import Morgan from "morgan";
 import { createToken, verifyToken } from "./token.js";
 
 const PORT = process.env.PORT || 4000;
@@ -12,6 +13,7 @@ if (!JWT_SECRET) {
 }
 
 const app = Express();
+app.use(Morgan("dev"));
 app.use(Cors());
 
 app.get("/", (req, res) => {
