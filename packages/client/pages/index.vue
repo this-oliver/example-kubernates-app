@@ -16,37 +16,37 @@ const verified = ref(null); // null, true, false
 const copied = ref(false);
 
 async function createToken(sample){
-  const response = await fetch(`${apiBase}/tokens/${sample}`, {
+  const { data, error } = await useFetch(`api/tokens/${sample}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  });
 
-  if(response.ok){
-    const body = await response.json();
-    token.value = body.token;
-    form.sample = '';
-  } else {
-    errorMessage.value = 'Failed to create token';
+  if(error.value){
+    errorMessage.value = error.value.message;
+    return;
   }
+
+  token.value = data.value.token;
+  form.sample = '';
 }
 
 async function verifyToken(token){
-  const response = await fetch(`${apiBase}/tokens/${token}/verify`, {
+  const { data, error } = await useFetch(`api/tokens/${token}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  });
 
-  if(response.ok){
-    const body = await response.json();
-    verified.value = body.verified;
-    form.token = '';
-  } else {
-    errorMessage.value = 'Failed to verify token';
+  if(error.value){
+    errorMessage.value = error.value.message;
+    return;
   }
+
+  verified.value = data.value.verified;
+  form.token = ''
 }
 
 async function copy(text){
