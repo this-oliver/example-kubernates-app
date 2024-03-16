@@ -1,4 +1,12 @@
-# See service-client.yaml for a brief explanation of the service config.
+# This is a Service config and it is used to define the communication
+# interface for deployments in a cluster towards other deployments in
+# the same cluster or towards the outside world.
+#
+# This particular service is used to expose the server deployment to
+# other deployments in the same cluster (ClusterIP). This allows the
+# client deployment to access the server deployment using the service
+# name as the hostname (example-app-server) and the port number
+# specified (4000) below.
 
 apiVersion: v1
 kind: Service
