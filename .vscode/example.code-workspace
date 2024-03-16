@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"name": "k8s",
+			"path": "../k8s"
+		},
+		{
+			"name": "client",
+			"path": "../packages/client"
+		},
+		{
+			"name": "server",
+			"path": "../packages/server"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.activeBackground": "#d08ac7",
+			"activityBar.background": "#d08ac7",
+			"activityBar.foreground": "#15202b",
+			"activityBar.inactiveForeground": "#15202b99",
+			"activityBarBadge.background": "#69722e",
+			"activityBarBadge.foreground": "#e7e7e7",
+			"commandCenter.border": "#15202b99",
+			"panel.border": "#d08ac7",
+			"sash.hoverBorder": "#d08ac7",
+			"statusBar.background": "#c265b6",
+			"statusBar.foreground": "#15202b",
+			"statusBarItem.hoverBackground": "#af45a1",
+			"statusBarItem.remoteBackground": "#c265b6",
+			"statusBarItem.remoteForeground": "#15202b",
+			"titleBar.activeBackground": "#c265b6",
+			"titleBar.activeForeground": "#15202b",
+			"titleBar.inactiveBackground": "#c265b699",
+			"titleBar.inactiveForeground": "#15202b99"
+		},
+		"peacock.color": "#c265b6"
+	}
+}
