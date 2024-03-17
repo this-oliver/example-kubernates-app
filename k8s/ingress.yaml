@@ -1,0 +1,49 @@
+# This file is used to configure the ingress for the example-app service.
+# The ingress is used to route traffic from the internet to the example-app
+# service (port 3000) in the kubernetes cluster as long as the host is
+# example-app.net.
+#
+# for more info, see https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
+#
+# SECURITY:
+#
+# Assuming that you also want to secure the ingress, you'll need to set up
+# TLs which means creating a pem file and a secret.
+#
+# To create a pem file, you can use openssl:
+#
+# $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${KEY_FILE} -out ${CERT_FILE} -subj "/CN=${HOST}/O=${HOST}" -addext "subjectAltName = DNS:${HOST}"
+#
+# - ${KEY_FILE} is the path to the key file (i.e. /etc/ssl/certs/example-app.net.key)
+# - ${CERT_FILE} is the path to the cert file (i.e. /etc/ssl/certs/example-app.net.pem)
+# - ${HOST} is the host name you want to use (i.e. example-app.net)
+#
+# for more info, see https://kubernetes.github.io/ingress-nginx/user-guide/tls/
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-app
+  labels:
+    app: example-app
+    component: ingress
+
+spec:
+  ingressClassName: nginx
+  rules:
+    # if the host is made up (you don't own the domain) or you are testing this locally, you can
+    # add an entry to your `/etc/hosts` file in your computer with the ip of the machine running
+    # the k8 cluster and the host name you want to use and then access the service using the host
+    # name in your browser.
+    #
+    # i.e. 123.123.123.123 example-app.net
+    - host: example-app.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-app-client # <- name of the service to route to
+                port:
+                  number: 3000 # <- port of the service to route to (see service-client.yaml)

@@ -19,3 +19,4 @@ resources:
   - deployment-server.yaml
   - service-client.yaml # <- defines the ports that will be exposed to externally from the respective pod
   - service-server.yaml
+  - ingress.yaml # <- defines the routing rules for the example-app service
