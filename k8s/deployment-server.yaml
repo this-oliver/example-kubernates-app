@@ -28,7 +28,7 @@ spec:
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: example-app-secrets # <- value from metadata.name in secrets.yaml
+                  name: example-app # <- value from metadata.name in secrets.yaml
                   key: jwt-secret
           ports:
             - containerPort: 4000
